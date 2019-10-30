@@ -37,7 +37,7 @@ non_adult_content = "I prefer cats to dogs"
 
 basic_english_text = "Programming is telling a computer how to do certain things by giving it instructions. These instructions are called programs. A person who writes instructions is a computer programmer. These instructions come in different languages; they are called programming languages. Sometimes programmers use special software which helps them to make programs, and sometimes they use simpler software, called a text editor, which only gives them a place to type."
 
-commercial_text = """Nexus 4 is the latest smartphone from Google. With cutting edge hardware, the latest version of Android, and the best Google apps  Nexus 4 puts the world's information at your fingertips."""
+commercial_text = """We offer commercial and corporate photography to businesses looking for experienced photographers with the skills and professionalism to meet their needs"""
 
 educational_text = """Your lungs are complex organs, but what they do is take a gas that your body needs to get rid of (carbon dioxide) and exchange it for a gas that your body can use (oxygen). In this article, we will take a close look at how your lungs work and how they keep your body's cells supplied with oxygen and get rid of the carbon dioxide waste. We will explain some of the conditions and diseases that make breathing harder and cause the lungsto fail. We will also explain why you can't hold your breath for a longtime and why you cough or hiccup. """
 
@@ -160,10 +160,7 @@ class TestAdultContentDetection(unittest.TestCase):
     def test_non_adult(self):
         self.assertEqual(datum_box.is_adult_content(non_adult_content), False)
 
-class TestReadabiltyAssesment(unittest.TestCase):
-    def test_basic(self):
-        self.assertEqual(datum_box.readability_assessment(basic_english_text), "basic")
-        
+       
 
 class TestLanguageDetection(unittest.TestCase):
     def test_english(self):
@@ -180,7 +177,7 @@ class TestEducationalDetection(unittest.TestCase):
         
 class TestKeywordExtract(unittest.TestCase):
     def test_keyword_extract(self):
-        self.assertIn("cheese", datum_box.keyword_extract("This is some example text about cheese"));
+        self.assertIn("cheese", datum_box.keyword_extract("This is some example text about cheese"))
         
 class TestTextExtract(unittest.TestCase):
     def test_text_extract(self):

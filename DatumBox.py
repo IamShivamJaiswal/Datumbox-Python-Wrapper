@@ -1,5 +1,5 @@
-from urllib2 import Request, urlopen
-from urllib import urlencode
+from urllib.request import Request, urlopen
+from urllib.parse import urlencode
 import json
 
 class DatumBox():
@@ -60,7 +60,7 @@ class DatumBox():
 		"""Returns a list of keywords from the given text"""
 		full_url = DatumBox.base_url + "KeywordExtraction.json"
 		response = self._send_request(full_url, {'text' : text, 'n' : 1})
-		return response['1'].keys();
+		return response['1'].keys()
 	
 	def text_extract(self, text):
 		"""Extracts text from a webpage"""
@@ -70,7 +70,7 @@ class DatumBox():
 		"""Returns number between 0 (No similarity) and 1(Exactly equal)"""
 		full_url = DatumBox.base_url + "DocumentSimilarity.json"
 		response = self._send_request(full_url, {'original': text, 'copy' : text2})
-		return response['Oliver'];
+		return response['Oliver']
 	
 	def _classification_request(self, text, api_name):
 		full_url = DatumBox.base_url + api_name + ".json"
@@ -78,10 +78,9 @@ class DatumBox():
 		
 	def _send_request(self, full_url, params_dict):
 		params_dict['api_key'] = self.api_key
-		request = Request(url=full_url, data=urlencode(params_dict))
+		request = Request(url=full_url, data=urlencode(params_dict).encode("utf-8"))
 		f = urlopen(request)
-		response = json.loads(f.read())
-		
+		response = json.loads(f.read().decode('utf-8'))
 		
 		if "error" in response['output']:
 			raise DatumBoxError(response['output']['error']['ErrorCode'], response['output']['error']['ErrorMessage'])
@@ -99,5 +98,3 @@ class DatumBoxError(Exception):
 	def __str__(self):
 		return "Datumbox API returned an error: " + str(self.error_code) + " " + self.error_message
 		
-		
-	
