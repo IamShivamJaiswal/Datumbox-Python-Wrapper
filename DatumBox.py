@@ -2,7 +2,7 @@ from urllib.request import Request, urlopen
 from urllib.parse import urlencode
 import json
 
-class DatumBox():
+class DatumBox(object):
 	
 	base_url = "http://api.datumbox.com/1.0/"
 	
